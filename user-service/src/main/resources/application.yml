@@ -1,19 +1,24 @@
+server:
+  port: 9090
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10010/eureka/
+
 spring:
   application:
-    name: oauth-service
+    name: user-service
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/spring-cloud-oauth?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
     username: root
     password: root
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-server:
-  port: 9999
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:10010/eureka/
+
+feign:
+  hystrix:
+    enabled: true

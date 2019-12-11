@@ -18,10 +18,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 /**
+ * 开启授权服务功能
+ *
  * @author yupengwu
  */
 @Configuration
-@EnableAuthorizationServer//开启授权服务功能
+@EnableAuthorizationServer
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -36,17 +38,21 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 创建一个客户端 名字是user-service
-        clients.inMemory().withClient("user-service")
+        clients.inMemory().withClient("test-service")
                 .secret("123456")
                 .scopes("service")
                 .authorizedGrantTypes("client_credentials")
+                .accessTokenValiditySeconds(3600)
+                .and()
+                .withClient("user-service")
+                .secret("123456")
+                .scopes("service")
+                .authorizedGrantTypes("password")
                 .accessTokenValiditySeconds(3600);
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        // By default Spring OAuth requires basic HTTP authentication. If you want to switch it
-        // off with Java based configuration, you have to allow form authentication for clients
         oauthServer.allowFormAuthenticationForClients();
     }
 
@@ -81,8 +87,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 return rawPassword.toString();
             }
         };
-        // MessageDigestPasswordEncoder pwdEncoder = new
-        // MessageDigestPasswordEncoder("sha-256");
+        // MessageDigestPasswordEncoder pwdEncoder = new MessageDigestPasswordEncoder("sha-256");
         // pwdEncoder.setEncodeHashAsBase64(true);
     }
 }

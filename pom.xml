@@ -10,6 +10,7 @@
     <modules>
         <module>eureka-server</module>
         <module>oauth-server</module>
+        <module>user-service</module>
     </modules>
     <packaging>pom</packaging>
     <parent>
