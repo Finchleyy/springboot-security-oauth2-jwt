@@ -37,17 +37,18 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // 创建一个客户端 名字是user-service
-        clients.inMemory().withClient("test-service")
+        // 创建两个客户端
+        clients.inMemory()
+                .withClient("test-service")
                 .secret("123456")
-                .scopes("service")
+                .scopes("service","biz_scope_1","biz_scope_2")
                 .authorizedGrantTypes("client_credentials")
-                .accessTokenValiditySeconds(3600)
+                .accessTokenValiditySeconds(7200)
                 .and()
                 .withClient("user-service")
                 .secret("123456")
                 .scopes("service")
-                .authorizedGrantTypes("password")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                 .accessTokenValiditySeconds(3600);
     }
 
