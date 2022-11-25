@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //TODO 这里 有问题,配置不生效
         http.authorizeRequests()
                 .antMatchers("/login", "/oauth/**","/actuator/**").permitAll()
                 .anyRequest().authenticated()
