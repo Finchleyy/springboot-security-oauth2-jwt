@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @author yupengwu
  */
 @Service
-public class MyUserDetailService implements UserDetailsService {
+public class PasswordUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;

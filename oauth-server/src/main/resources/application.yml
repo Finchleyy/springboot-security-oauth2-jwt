@@ -1,3 +1,5 @@
+server:
+  port: 9999
 spring:
   application:
     name: oauth-service
@@ -6,13 +8,16 @@ spring:
     url: jdbc:mysql://localhost:3306/spring-cloud-oauth?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
     username: root
     password: root
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-server:
-  port: 9999
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+
 eureka:
   client:
     serviceUrl:

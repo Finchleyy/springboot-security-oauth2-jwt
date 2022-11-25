@@ -23,7 +23,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/user/login", "/user/register").permitAll()
-                .antMatchers("/**").authenticated();
+                .anyRequest().authenticated();
     }
 
     @Override
